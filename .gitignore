@@ -1,0 +1,45 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Vite → nginx 静态产物（在 frontend 目录执行 npm run build 生成）###
+nginx-1.30.1/html/assets/
+nginx-1.30.1/html/index.html
+nginx-1.30.1/html/*.svg
+nginx-1.30.1/html/*.ico
+nginx-1.30.1/html/50x.html
+nginx-1.30.1/logs/*.log
+uploads/files/*.mp4
+uploads/files/*.jpg
+uploads/files/*.png
+uploads/files/*.gif

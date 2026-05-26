@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: MyPlatform
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:my_platform}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  data:
+    redis:
+      host: ${REDIS_HOST:192.168.75.133}
+      port: ${REDIS_PORT:6379}
+      password: "123456"
+      database: ${REDIS_DB:0}
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 50
+          max-idle: 20
+          min-idle: 5
+          max-wait: 3000ms
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+server:
+  port: 8080
+logging:
+  level:
+    root: INFO
+    org.example.myplatform: INFO
+    org.example.myplatform.mapper: WARN
+  file:
+    name: logs/myplatform.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+jwt:
+  secret: ${JWT_SECRET:dev-only-not-for-production-32chars-min}
+  blacklist-retention-ms: 604800000
+auth:
+  activity-timeout: 1800000
+cors:
+  allowed-origins: "*"
+avatar:
+  upload-path: ${AVATAR_UPLOAD_PATH:${user.dir}/uploads/avatars}
+file:
+  upload-path: ${FILE_UPLOAD_PATH:${user.dir}/uploads/files}
+  max-size: 500MB

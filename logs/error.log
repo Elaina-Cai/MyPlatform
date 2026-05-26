@@ -1,0 +1,9 @@
+2026/05/19 21:04:17 [emerg] 24400#26116: CreateDirectory() "C:\Users\Elaina\program\Java\MyPlatform/temp/client_body_temp" failed (3: The system cannot find the path specified)
+2026/05/20 22:16:51 [emerg] 36188#39224: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/21 21:58:37 [emerg] 6016#23676: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/21 21:58:48 [notice] 32884#19668: signal process started
+2026/05/21 21:58:48 [error] 32884#19668: OpenEvent("Global\ngx_reload_36988") failed (2: The system cannot find the file specified)
+2026/05/24 19:20:38 [emerg] 37880#32240: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/24 19:21:01 [notice] 41584#7936: signal process started
+2026/05/24 19:21:01 [error] 41584#7936: OpenEvent("Global\ngx_reload_26740") failed (2: The system cannot find the file specified)
+2026/05/25 16:51:06 [emerg] 10352#30040: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
