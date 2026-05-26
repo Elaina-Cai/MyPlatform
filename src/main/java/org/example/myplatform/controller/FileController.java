@@ -110,7 +110,7 @@ public class FileController {
         String newFilename = UUID.randomUUID().toString() + ext;
 
         try {
-            Path uploadDir = Paths.get(uploadPath);
+            Path uploadDir = Paths.get(uploadPath).resolve("files");
             if (!Files.exists(uploadDir)) {
                 Files.createDirectories(uploadDir);
             }

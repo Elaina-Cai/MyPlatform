@@ -156,7 +156,8 @@ public class UserServiceImpl implements UserService {
             user.setAvatar(avatarUrl);
         }
         userMapper.updateById(user);
-        // TODO: 高并发下缓存更新和DB更新之间可能有请求读到旧值
+        //TODO：更新redis中的用户信息（确保聊天消息显示最新头像和昵称）但是高并发下可能短暂不一致，可考虑加分布式锁或延迟双删
+        redisUtil.delete("user:" + user.getId());
         redisUtil.setUserProfile(user.getId(), user.getNickname(), user.getAvatar());
     }
 
@@ -221,6 +222,7 @@ public class UserServiceImpl implements UserService {
                 userId, oldNickname, newNickname);
 
         // 更新 Redis 缓存（确保聊天消息显示最新昵称）
+        redisUtil.delete("user:" + user.getId());
         redisUtil.setUserProfile(user.getId(), user.getNickname(), user.getAvatar());
         
         return true;

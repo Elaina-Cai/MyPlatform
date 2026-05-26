@@ -55,7 +55,7 @@ auth:
 cors:
   allowed-origins: "*"
 avatar:
-  upload-path: ${AVATAR_UPLOAD_PATH:${user.dir}/uploads/avatars}
+  upload-path: ${AVATAR_UPLOAD_PATH:${user.dir}/uploads}
 file:
-  upload-path: ${FILE_UPLOAD_PATH:${user.dir}/uploads/files}
+  upload-path: ${FILE_UPLOAD_PATH:${user.dir}/uploads}
   max-size: 500MB

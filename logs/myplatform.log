@@ -6833,3 +6833,190 @@ io.jsonwebtoken.security.SignatureException: JWT signature does not match locall
 2026-05-26 14:56:25 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
 2026-05-26 14:56:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
 2026-05-26 14:56:26 [main] INFO  o.e.myplatform.MyPlatformApplication - Started MyPlatformApplication in 2.384 seconds (process running for 2.623)
+2026-05-26 15:13:40 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 1584 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
+2026-05-26 15:13:40 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "dev"
+2026-05-26 15:13:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-26 15:13:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-26 15:13:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2026-05-26 15:13:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-26 15:13:41 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-26 15:13:41 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-05-26 15:13:41 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-26 15:13:41 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 859 ms
+2026-05-26 15:13:41 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
+2026-05-26 15:13:41 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
+2026-05-26 15:13:41 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\avatars/
+2026-05-26 15:13:41 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
+2026-05-26 15:13:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-26 15:13:42 [main] INFO  o.e.myplatform.MyPlatformApplication - Started MyPlatformApplication in 2.227 seconds (process running for 2.45)
+2026-05-26 19:40:59 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 35208 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
+2026-05-26 19:40:59 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "dev"
+2026-05-26 19:40:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-26 19:40:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-26 19:40:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2026-05-26 19:41:00 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-26 19:41:00 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-26 19:41:00 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-05-26 19:41:00 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-26 19:41:00 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1090 ms
+2026-05-26 19:41:00 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
+2026-05-26 19:41:00 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
+2026-05-26 19:41:00 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\avatars/
+2026-05-26 19:41:00 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
+2026-05-26 19:41:01 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-26 19:41:04 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'redisMessageListenerContainer'
+2026-05-26 19:41:04 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-26 19:41:04 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Failed to start bean 'redisMessageListenerContainer'
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:288)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:472)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:257)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:990)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at org.example.myplatform.MyPlatformApplication.main(MyPlatformApplication.java:13)
+Caused by: org.springframework.data.redis.listener.adapter.RedisListenerExecutionFailedException: org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.lazyListen(RedisMessageListenerContainer.java:383)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.start(RedisMessageListenerContainer.java:361)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:285)
+	... 13 common frames omitted
+Caused by: org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.translateException(LettuceConnectionFactory.java:1849)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1780)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1582)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.lambda$getConnection$0(LettuceConnectionFactory.java:1562)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.doInLock(LettuceConnectionFactory.java:1523)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1559)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:1245)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:1051)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer$Subscriber.lambda$initialize$0(RedisMessageListenerContainer.java:1241)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer$Subscriber.doInLock(RedisMessageListenerContainer.java:1455)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer$Subscriber.initialize(RedisMessageListenerContainer.java:1235)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.doSubscribe(RedisMessageListenerContainer.java:428)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.lazyListen(RedisMessageListenerContainer.java:404)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.lazyListen(RedisMessageListenerContainer.java:374)
+	... 15 common frames omitted
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to 192.168.75.133/<unresolved>:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78)
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56)
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:350)
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:215)
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:112)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:112)
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1778)
+	... 27 common frames omitted
+Caused by: java.nio.channels.ClosedChannelException: null
+	at io.netty.channel.nio.AbstractNioChannel.doClose(AbstractNioChannel.java:507)
+	at io.netty.channel.socket.nio.NioSocketChannel.doClose(NioSocketChannel.java:348)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:752)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:729)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:619)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.close(DefaultChannelPipeline.java:1299)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeClose(AbstractChannelHandlerContext.java:755)
+	at io.netty.channel.AbstractChannelHandlerContext.access$1200(AbstractChannelHandlerContext.java:61)
+	at io.netty.channel.AbstractChannelHandlerContext$11.run(AbstractChannelHandlerContext.java:738)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-05-26 19:43:50 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 3172 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
+2026-05-26 19:43:50 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "dev"
+2026-05-26 19:43:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-26 19:43:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-26 19:43:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2026-05-26 19:43:50 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-26 19:43:50 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-26 19:43:50 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-05-26 19:43:51 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-26 19:43:51 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 802 ms
+2026-05-26 19:43:51 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
+2026-05-26 19:43:51 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
+2026-05-26 19:43:51 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\avatars/
+2026-05-26 19:43:51 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
+2026-05-26 19:43:51 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-26 19:43:52 [main] INFO  o.e.myplatform.MyPlatformApplication - Started MyPlatformApplication in 2.13 seconds (process running for 2.349)
+2026-05-26 19:43:59 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-26 19:43:59 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-26 19:43:59 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-05-26 19:44:03 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-26 19:44:03 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e1f5921
+2026-05-26 19:44:03 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-26 19:44:04 [http-nio-8080-exec-1] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-26 19:44:04 [http-nio-8080-exec-1] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=4d427995-121d-a236-3572-ccc5237b4885
+2026-05-26 19:44:04 [http-nio-8080-exec-1] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-26 19:44:04 [http-nio-8080-exec-1] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已加入群聊频道: groupId=1
+2026-05-26 19:44:04 [http-nio-8080-exec-1] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-26 19:44:08 [http-nio-8080-exec-2] INFO  o.e.m.s.authanduser.UserServiceImpl - 用户昵称更新成功：userId=13, oldNickname=Elaina, newNickname=Elaina1
+2026-05-26 19:44:08 [http-nio-8080-exec-2] INFO  o.e.m.controller.UserController - 用户13修改昵称为：Elaina1
+2026-05-26 19:44:11 [http-nio-8080-exec-6] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=4d427995-121d-a236-3572-ccc5237b4885, status=CloseStatus[code=1001, reason=null]
+2026-05-26 19:44:11 [http-nio-8080-exec-6] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已离开群聊频道: groupId=1
+2026-05-26 19:44:11 [http-nio-8080-exec-6] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已取消订阅 1 个群聊频道
+2026-05-26 19:44:11 [http-nio-8080-exec-8] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-26 19:44:11 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=7a340986-ffab-7e5e-ed53-e774df51784b
+2026-05-26 19:44:11 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-26 19:44:11 [http-nio-8080-exec-8] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已加入群聊频道: groupId=1
+2026-05-26 19:44:11 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-26 19:44:45 [http-nio-8080-exec-6] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=7a340986-ffab-7e5e-ed53-e774df51784b, status=CloseStatus[code=1001, reason=null]
+2026-05-26 19:44:45 [http-nio-8080-exec-6] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已离开群聊频道: groupId=1
+2026-05-26 19:44:45 [http-nio-8080-exec-6] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已取消订阅 1 个群聊频道
+2026-05-26 19:45:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-26 19:45:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-26 19:46:36 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 24300 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
+2026-05-26 19:46:36 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "dev"
+2026-05-26 19:46:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-26 19:46:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-26 19:46:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2026-05-26 19:46:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-26 19:46:36 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-26 19:46:36 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-05-26 19:46:36 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-26 19:46:36 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 789 ms
+2026-05-26 19:46:37 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
+2026-05-26 19:46:37 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
+2026-05-26 19:46:37 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\avatars/
+2026-05-26 19:46:37 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
+2026-05-26 19:46:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-26 19:46:38 [main] INFO  o.e.myplatform.MyPlatformApplication - Started MyPlatformApplication in 2.137 seconds (process running for 2.345)
+2026-05-26 19:46:56 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-26 19:46:56 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-26 19:46:56 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-26 19:46:56 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-26 19:46:56 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@53c55ad7
+2026-05-26 19:46:56 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-26 19:46:56 [http-nio-8080-exec-7] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-26 19:46:56 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=1a49e2df-d422-3e1f-8b86-83bada917b74
+2026-05-26 19:46:56 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-26 19:46:56 [http-nio-8080-exec-7] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已加入群聊频道: groupId=1
+2026-05-26 19:46:56 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-26 19:47:06 [http-nio-8080-exec-6] INFO  o.e.m.s.authanduser.UserServiceImpl - 更新头像: userId=13, avatarUrl=/avatars/13_1779796026314.png
+2026-05-26 19:47:20 [http-nio-8080-exec-7] INFO  o.e.m.s.authanduser.UserServiceImpl - 更新头像: userId=13, avatarUrl=/avatars/13_1779796040141.png
+2026-05-26 19:49:21 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=1a49e2df-d422-3e1f-8b86-83bada917b74, status=CloseStatus[code=1001, reason=null]
+2026-05-26 19:49:21 [http-nio-8080-exec-8] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已离开群聊频道: groupId=1
+2026-05-26 19:49:21 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已取消订阅 1 个群聊频道
+2026-05-26 19:49:22 [http-nio-8080-exec-3] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-26 19:49:22 [http-nio-8080-exec-3] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=f7039f00-7aaf-ada5-a98a-bceade914687
+2026-05-26 19:49:22 [http-nio-8080-exec-3] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-26 19:49:22 [http-nio-8080-exec-3] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已加入群聊频道: groupId=1
+2026-05-26 19:49:22 [http-nio-8080-exec-3] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-26 19:58:41 [http-nio-8080-exec-10] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=f7039f00-7aaf-ada5-a98a-bceade914687, status=CloseStatus[code=1001, reason=null]
+2026-05-26 19:58:41 [http-nio-8080-exec-10] INFO  o.e.m.w.GroupMessageSubscriber - 用户 13 已离开群聊频道: groupId=1
+2026-05-26 19:58:41 [http-nio-8080-exec-10] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已取消订阅 1 个群聊频道
+2026-05-26 20:00:00 [scheduling-1] INFO  o.e.myplatform.task.FileCleanupTask - 开始清理未引用的文件...
+2026-05-26 20:00:00 [scheduling-1] INFO  o.e.myplatform.task.FileCleanupTask - 当前消息中引用的文件数量: 7
+2026-05-26 20:00:00 [scheduling-1] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理完成，删除 0 个文件，跳过 7 个文件
+2026-05-26 20:51:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-26 20:51:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
