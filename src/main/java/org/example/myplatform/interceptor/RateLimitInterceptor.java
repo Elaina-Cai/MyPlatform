@@ -16,7 +16,7 @@ public class RateLimitInterceptor implements HandlerInterceptor {
 
     private static final String RATE_LIMIT_PREFIX = "rate:limit:";
     private static final int MAX_REQUESTS_PER_MINUTE = 200;
-    private static final int LOGIN_MAX_REQUESTS_PER_MINUTE = 10;
+    private static final int LOGIN_MAX_REQUESTS_PER_MINUTE = 30;
     private static final int WINDOW_SECONDS = 60;
 
     public RateLimitInterceptor(StringRedisTemplate redisTemplate) {
