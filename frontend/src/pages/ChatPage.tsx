@@ -399,7 +399,9 @@ const ChatPage = forwardRef<ChatPageRef, ChatPageProps>(({
                 )}
                 {pf.error && <span className="upload-error-text">上传失败</span>}
                 {!pf.uploading && !pf.error && <span className="upload-ready-text">待发送</span>}
-                <button className="upload-cancel-btn" onClick={() => void handleCancelFile(pf.id)}>×</button>
+                {!pf.uploading && (
+                  <button className="upload-cancel-btn" onClick={() => void handleCancelFile(pf.id)}>×</button>
+                )}
               </div>
             ))}
           </div>
@@ -437,7 +439,7 @@ const ChatPage = forwardRef<ChatPageRef, ChatPageProps>(({
               ) : (
                 <img src={previewUrl} alt="预览" className="preview-full" />
               )}
-              <button className="preview-modal-close" onClick={() => setPreviewUrl(null)}>×</button>
+          <button className="preview-modal-close" onClick={() => !hasUploading && setPreviewUrl(null)} disabled={hasUploading}>×</button>
             </div>
           </div>
         )}

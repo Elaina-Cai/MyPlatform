@@ -2044,6 +2044,11 @@ button:disabled {
   background: rgba(255,255,255,.3);
 }
 
+.preview-modal-close:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .upload-progress-text {
   position: absolute;
   top: 50%;
