@@ -19,22 +19,69 @@ export function ProfilePage() {
     }
   }, [user]);
 
+  async function convertToJpeg(file: File, maxWidth = 800): Promise<File> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        
+        let { width, height } = img;
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+        
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          reject(new Error("无法创建画布上下文"));
+          return;
+        }
+        
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error("图片转换失败"));
+              return;
+            }
+            const fileName = file.name.replace(/\.[^.]+$/, ".jpg");
+            resolve(new File([blob], fileName, { type: "image/jpeg" }));
+          },
+          "image/jpeg",
+          0.9
+        );
+      };
+      
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("无法加载图片"));
+      };
+      
+      img.src = url;
+    });
+  }
+
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('=== handleAvatarUpload called');
     const file = e.target.files?.[0];
-    console.log('=== selected file:', file);
     if (!file) return;
 
     setUploading(true);
     setUploadError("");
 
     try {
+      const convertedFile = await convertToJpeg(file);
+      
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", convertedFile);
 
       const token = getStoredToken();
-      console.log('=== token:', token ? 'exists' : 'not found');
-      console.log('=== sending request to /api/user/avatar/upload');
 
       const response = await fetch("/api/user/avatar/upload", {
         method: "POST",
@@ -44,17 +91,16 @@ export function ProfilePage() {
         body: formData,
       });
 
-      console.log('=== response status:', response.status);
-
-      if (!response.ok) {
-        throw new Error("上传失败");
+      const result = await response.json();
+      if (!response.ok || result.code !== 200) {
+        throw new Error(result.message || "上传失败");
       }
 
       await refreshUser();
       setSaveMessage("头像更新成功！");
       setTimeout(() => setSaveMessage(""), 3000);
     } catch (err) {
-      setUploadError("头像上传失败，请重试");
+      setUploadError(err instanceof Error ? err.message : "头像上传失败，请重试");
     } finally {
       setUploading(false);
       if (fileInputRef.current) {
@@ -115,12 +161,8 @@ export function ProfilePage() {
         <div className="avatar-section">
           <div className="avatar-preview">
             <div className="avatar-wrapper" onClick={() => {
-              console.log('=== avatar clicked, fileInputRef:', fileInputRef.current);
               if (fileInputRef.current) {
                 fileInputRef.current.click();
-                console.log('=== file input clicked');
-              } else {
-                console.log('=== fileInputRef is null!');
               }
             }}>
               <div className="user-avatar large">
@@ -139,12 +181,14 @@ export function ProfilePage() {
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/png,image/jpeg"
+              accept="image/*"
+              capture="environment"
               className="avatar-input"
               onChange={handleAvatarUpload}
               disabled={uploading}
             />
             <p className="avatar-hint">点击头像上传新头像</p>
+            {uploading && <p className="uploading-text">图片转换中...</p>}
             {uploadError && <p className="error-text">{uploadError}</p>}
           </div>
         </div>

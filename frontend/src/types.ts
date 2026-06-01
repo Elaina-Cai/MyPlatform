@@ -61,7 +61,7 @@ export interface ChatMessage {
  * WebSocket 推送消息
  */
 export interface PushMessage {
-  type: "chat" | "friend_online" | "friend_offline";
+  type: "chat" | "friend_online" | "friend_offline" | "friend_away";
   senderId?: number;
   senderNickname?: string;
   senderAvatar?: string;

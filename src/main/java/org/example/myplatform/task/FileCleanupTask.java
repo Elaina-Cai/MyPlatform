@@ -53,8 +53,7 @@ public class FileCleanupTask {
         long cutoffTime = System.currentTimeMillis() - (cleanupHours * 60 * 60 * 1000L);
         
         Set<String> referencedFiles = getReferencedFiles();
-        log.info("当前消息中引用的文件数量: {}", referencedFiles.size());
-        
+
         AtomicInteger deletedCount = new AtomicInteger(0);
         AtomicInteger skippedCount = new AtomicInteger(0);
         
@@ -78,7 +77,6 @@ public class FileCleanupTask {
                         if (fileTime < cutoffTime) {
                             Files.delete(file);
                             deletedCount.incrementAndGet();
-                            log.debug("删除未引用文件: {}", fileName);
                         } else {
                             skippedCount.incrementAndGet();
                         }

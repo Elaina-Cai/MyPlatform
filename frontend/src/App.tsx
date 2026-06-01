@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { RegisterPage } from "./pages/RegisterPage";
 import SocialPage from "./pages/SocialPage";
+import GamePage from "./pages/GamePage";
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const { token, loading } = useAuth();
@@ -50,6 +51,14 @@ function AppRoutes() {
         element={
           <RequireAuth>
             <SocialPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/game/:id"
+        element={
+          <RequireAuth>
+            <GamePage />
           </RequireAuth>
         }
       />

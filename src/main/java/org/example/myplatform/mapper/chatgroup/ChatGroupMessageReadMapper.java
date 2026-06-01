@@ -23,8 +23,9 @@ public interface ChatGroupMessageReadMapper extends BaseMapper<ChatGroupMessageR
     @Insert("INSERT INTO chat_group_message_read (message_id, user_id, read_at) VALUES (#{messageId}, #{userId}, NOW())")
     void insertReadRecord(@Param("messageId") Long messageId, @Param("userId") Long userId);
 
-    @Select("SELECT * FROM chat_group_message_read WHERE message_id = #{messageId} AND user_id = #{userId}")
-    ChatGroupMessageRead selectByMessageIdAndUserId(@Param("messageId") Long messageId, @Param("userId") Long userId);
+    @Select("SELECT 1 FROM chat_group_message_read " +
+            "WHERE message_id = #{messageId} AND user_id = #{userId} LIMIT 1")
+    Integer checkMessageRead(@Param("messageId") Long messageId, @Param("userId") Long userId);
 
     @Delete("DELETE FROM chat_group_message_read WHERE message_id IN (SELECT id FROM chat_group_message WHERE group_id = #{groupId})")
     void deleteByGroupId(@Param("groupId") Long groupId);

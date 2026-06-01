@@ -18,10 +18,9 @@ public interface FriendMapper extends BaseMapper<Friend> {
             "GROUP BY CASE WHEN from_user_id = #{userId} THEN to_user_id ELSE from_user_id END")
     List<Long> selectFriendIdsByUserId(@Param("userId") Long userId);
 
-    @Select("SELECT COALESCE(SUM(cnt), 0) FROM (" +
-            "SELECT COUNT(*) as cnt FROM friend WHERE from_user_id = #{userId1} AND to_user_id = #{userId2} AND status = 1 " +
-            "UNION ALL " +
-            "SELECT COUNT(*) FROM friend WHERE from_user_id = #{userId2} AND to_user_id = #{userId1} AND status = 1" +
-            ") AS counts")
+    @Select("SELECT COUNT(*) FROM friend WHERE status = 1 AND (" +
+            "(from_user_id = #{userId1} AND to_user_id = #{userId2}) OR " +
+            "(from_user_id = #{userId2} AND to_user_id = #{userId1})" +
+            ")")
     int checkFriendship(@Param("userId1") Long userId1, @Param("userId2") Long userId2);
 }

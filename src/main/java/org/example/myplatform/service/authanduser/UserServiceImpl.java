@@ -91,7 +91,6 @@ public class UserServiceImpl implements UserService {
         String token = jwtUtil.generateToken(user.getId());
         // 缓存用户信息到 Redis（用于聊天功能）
         redisUtil.setUserProfile(user.getId(), user.getNickname(), user.getAvatar());
-        log.debug("缓存头像: userId={}, avatar={}", user.getId(), user.getAvatar());
         // 顶号逻辑(如果本来这个账号已经在线)：将用户原有的有效 token 加入黑名单
         String oldToken = redisUtil.getCurrentUserToken(user.getId());
         if (oldToken != null && !oldToken.equals(token)) {

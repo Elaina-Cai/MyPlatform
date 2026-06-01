@@ -20,10 +20,7 @@ import org.example.myplatform.vo.chatgroup.ChatGroupMessageVO;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.PingMessage;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +49,10 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
     private final Map<String, WebSocketSession> onlineSessions = new ConcurrentHashMap<>();
     // 用Map存储 userId → 所在群聊列表（用于断线清理）
     private final Map<Long, List<Long>> userGroups = new ConcurrentHashMap<>();
+    // 用Map存储 userId → 当前状态（用于避免重复推送）
+    private final Map<Long, String> userStatusCache = new ConcurrentHashMap<>();
+    //上次状态检测时间
+    private long lastCheckTime = 0;
 
     public MessageWebSocketHandler(RedisUtil redisUtil, XssUtil xssUtil, FriendService friendService,
                                    MessageService messageService, ChatGroupService chatGroupService,
@@ -99,8 +100,14 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
         // 2. 存 Redis：userId → sessionId
         redisUtil.setUserOnline(userId, session.getId());
         log.info("WebSocket 连接: userId={}, sessionId={}", userId, session.getId());
-        // 3. 存 Redis：sessionId → userId（反向索引）
+        // 3. 立即存入本地 Map（必须在推送消息之前）
+        onlineSessions.put(session.getId(), session);
+        log.info("当前在线会话数量: {}", onlineSessions.size());
+        // 4. 存 Redis：sessionId → userId（反向索引）
         redisUtil.setSessionUser(session.getId(), userId);
+        log.info("连接建立后，userId={} 的 lastActivity={}, isAway={}, status={}",
+            userId, redisUtil.getUserLastActivityTime(userId),
+            redisUtil.isUserAway(userId), redisUtil.getUserStatus(userId));
         // 4. 确保用户信息已缓存到 Redis
         // TODO: 高并发下可能短暂不一致
         if (redisUtil.getUserProfile(userId) == null) {
@@ -115,22 +122,39 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
         }
         // 4. 查询好友列表
         List<Long> friendIds = friendService.getFriendIds(userId);
-        log.debug("查询到好友数量: {}", friendIds.size());
-        // 5. 推送给每个在线好友
-        String onlineNotify = "{\"type\":\"friend_online\",\"friendId\":" + userId + "}";
+
+        // 5. 推送给每个在线好友，告知自己的状态
+        // 注意：连接时强制推送 online，不读取 Redis 中的旧状态（可能是 away）
+        String myNotifyType = "friend_online";
+        String myStatusNotify = "{\"type\":\"" + myNotifyType + "\",\"friendId\":" + userId + "}";
+        log.info("用户 {} 推送自己状态给好友: {}, 在线好友数: {}", userId, myNotifyType, friendIds.size());
         for (Long friendId : friendIds) {
             String friendSessionId = redisUtil.getUserSessionId(friendId);
             if (friendSessionId != null) {
-                // 找到好友的 session，推送上线消息
-                sendToUser(friendId, onlineNotify);
-                log.debug("已推送上线通知给好友: {}", friendId);
+                sendToUser(friendId, myStatusNotify);
             }
         }
-        // 6. 存储 session 到 Map
-        onlineSessions.put(session.getId(), session);
-        log.info("当前在线会话数量: {}", onlineSessions.size());
 
-        // 7. 订阅用户所在的所有群聊频道
+        // 6. 向用户本人推送所有在线好友的状态
+        for (Long friendId : friendIds) {
+            String friendSessionId = redisUtil.getUserSessionId(friendId);
+            if (friendSessionId != null) {
+                // 获取好友状态：优先从缓存获取，缓存没有则从 Redis 获取
+                String friendCachedStatus = userStatusCache.get(friendId);
+                String friendStatus = friendCachedStatus != null ? friendCachedStatus : redisUtil.getUserStatus(friendId);
+                // 如果缓存和 Redis 都没有状态，默认设为在线
+                if (friendStatus == null || RedisUtil.STATUS_OFFLINE.equals(friendStatus)) {
+                    friendStatus = RedisUtil.STATUS_ONLINE;
+                }
+                String friendNotifyType = RedisUtil.STATUS_AWAY.equals(friendStatus) ? "friend_away" : "friend_online";
+                String friendStatusNotify = "{\"type\":\"" + friendNotifyType + "\",\"friendId\":" + friendId + "}";
+                sendToUser(userId, friendStatusNotify);
+            }
+        }
+        // 7. 推送初始状态加载完成标志
+        sendToUser(userId, "{\"type\":\"friends_status_ready\"}");
+
+        // 8. 订阅用户所在的所有群聊频道
         List<Long> groupIds = chatGroupService.getMyGroups(userId).stream()
                 .map(g -> g.getId())
                 .toList();
@@ -146,6 +170,12 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
     @Override
     //handleTextMessage是TextWebSocketHandler里的方法，这里重写
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        // 更新用户活跃时间
+        Long userId = (Long) session.getAttributes().get("userId");
+        if (userId != null) {
+            redisUtil.updateUserLastActivity(userId);
+        }
+
         JsonNode json = objectMapper.readTree(message.getPayload());
         String type = json.get("type").asText();
         if ("chat".equals(type)) {
@@ -180,7 +210,6 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 
         // 3. 保存消息到数据库
         messageService.saveMessage(senderId, receiverId, content, fileUrl, fileType);
-        log.debug("私聊消息已保存");
 
         // 4. 获取发送者信息（从 Redis）
         // TODO: 高并发下可能短暂不一致
@@ -225,6 +254,9 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
     private void handleGroupChatMessage(JsonNode json, WebSocketSession session) throws Exception {
         // 1. 从 session 获取发送者 ID
         Long senderId = (Long) session.getAttributes().get("userId");
+        // 更新用户活跃时间
+        redisUtil.updateUserLastActivity(senderId);
+        
         Long groupId = json.get("groupId").asLong();
         String content = json.get("content").asText();
         int messageType = json.has("messageType") ? json.get("messageType").asInt() : 1;
@@ -283,7 +315,6 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
         Long groupId = json.get("groupId").asLong();
         if (groupMessageSubscriber != null) {
             groupMessageSubscriber.removeUserFromGroup(userId, groupId);
-            log.info("用户 {} 取消订阅群聊频道: groupId={}", userId, groupId);
         }
     }
     
@@ -291,20 +322,22 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
      * 发送消息给指定用户
      */
     public void sendToUser(Long userId, String message) {
-        // 1. 从 Redis 获取该用户的 WebSocket sessionId
         String sessionId = redisUtil.getUserSessionId(userId);
 
-        if (sessionId != null) {
-            // 2. 从本地 Map 获取该用户的 WebSocket 连接
-            WebSocketSession targetSession = onlineSessions.get(sessionId);
+        if (sessionId == null) {
+            return;
+        }
 
-            if (targetSession != null && targetSession.isOpen()) {
-                try {
-                    // 3. 主动推送消息给该用户（无需用户发起请求）
-                    targetSession.sendMessage(new TextMessage(message));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        WebSocketSession targetSession = onlineSessions.get(sessionId);
+        if (targetSession == null) {
+            return;
+        }
+
+        if (targetSession.isOpen()) {
+            try {
+                targetSession.sendMessage(new TextMessage(message));
+            } catch (IOException e) {
+                log.warn("消息发送失败: userId={}, sessionId={}", userId, sessionId, e);
             }
         }
     }
@@ -412,15 +445,15 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
         if (userId == null) {
             return;
         }
-        // 2. 从本地 Map 移除
+        // 2. 从本地 Map 移除（必须在心跳检测之前，避免竞态条件）
         onlineSessions.remove(session.getId());
+        userStatusCache.remove(userId);
         // 3. 取消订阅群聊频道
         List<Long> groupIds = userGroups.remove(userId);
         if (groupIds != null && groupMessageSubscriber != null) {
             for (Long groupId : groupIds) {
                 groupMessageSubscriber.removeUserFromGroup(userId, groupId);
             }
-            log.info("用户 {} 已取消订阅 {} 个群聊频道", userId, groupIds.size());
         }
         // 4. 从 Redis 清理在线状态
         redisUtil.removeUserOnline(userId);
@@ -435,16 +468,76 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
         }
     }
 
+    @Override
+    protected void handlePongMessage(WebSocketSession session, PongMessage message) {
+        Long userId = (Long) session.getAttributes().get("userId");
+        if (userId != null) {
+        }
+    }
+
     @Scheduled(fixedRate = 25000)
     public void heartbeat() {
         PingMessage ping = new PingMessage(ByteBuffer.wrap(new byte[]{1}));
+        int sentCount = 0;
         for (WebSocketSession session : onlineSessions.values()) {
             if (session.isOpen()) {
                 try {
                     session.sendMessage(ping);
+                    sentCount++;
                 } catch (IOException e) {
                     log.warn("心跳发送失败: sessionId={}", session.getId());
                 }
+            }
+        }
+
+        long now = System.currentTimeMillis();
+        if (now - lastCheckTime < 10000) return;
+        lastCheckTime = now;
+
+        log.info("心跳检测开始");
+        checkUserStatus();
+    }
+
+    private void checkUserStatus() {
+        for (Map.Entry<String, WebSocketSession> entry : onlineSessions.entrySet()) {
+            String sessionId = entry.getKey();
+            WebSocketSession session = entry.getValue();
+            // 跳过已关闭的 session
+            if (!session.isOpen()) continue;
+
+            Long userId = redisUtil.getUserIdBySessionId(sessionId);
+            if (userId == null) continue;
+
+            Long lastActivity = redisUtil.getUserLastActivityTime(userId);
+            boolean isAway = redisUtil.isUserAway(userId);
+            String newStatus = isAway ? RedisUtil.STATUS_AWAY : RedisUtil.STATUS_ONLINE;
+            String cachedStatus = userStatusCache.get(userId);
+
+            if (cachedStatus == null) {
+                // 首次检测：设置缓存和 Redis 状态
+                userStatusCache.put(userId, newStatus);
+                redisUtil.setUserStatus(userId, newStatus);
+                notifyFriendsStatusChange(userId, newStatus);
+                continue;
+            }
+
+            // 状态变化时同步到 Redis 并通知好友
+            // 注意：不去更新 lastActivity，避免覆盖消息处理中的更新时间
+            if (!newStatus.equals(cachedStatus)) {
+                userStatusCache.put(userId, newStatus);
+                redisUtil.setUserStatus(userId, newStatus);
+                notifyFriendsStatusChange(userId, newStatus);
+            }
+        }
+    }
+    
+    private void notifyFriendsStatusChange(Long userId, String newStatus) {
+        List<Long> friendIds = friendService.getFriendIds(userId);
+        String notifyType = RedisUtil.STATUS_AWAY.equals(newStatus) ? "friend_away" : "friend_online";
+        String notifyMsg = "{\"type\":\"" + notifyType + "\",\"friendId\":" + userId + "}";
+        for (Long friendId : friendIds) {
+            if (redisUtil.isUserOnline(friendId)) {
+                sendToUser(friendId, notifyMsg);
             }
         }
     }

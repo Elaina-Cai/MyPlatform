@@ -76,22 +76,63 @@ public class RedisUtil {
     private static final String USER_SESSION_PREFIX = "user:session:";
     private static final String FIELD_LAST_ACTIVITY = "lastActivity";
     private static final String FIELD_CURRENT_TOKEN = "currentToken";
+    private static final String FIELD_STATUS = "status";
+    
+    public static final String STATUS_ONLINE = "online";
+    public static final String STATUS_AWAY = "away";
+    public static final String STATUS_OFFLINE = "offline";
+    //离开状态的阈值：超过5分钟无活动转为离开
+    private static final long AWAY_THRESHOLD_MILLIS = 5 * 60 * 1000;
+
     //保存用户会话数据
     public void saveUserSession(Long userId, String token, long timestamp) {
         String key = USER_SESSION_PREFIX + userId;
         Map<String, String> sessionData = new HashMap<>();
         sessionData.put(FIELD_LAST_ACTIVITY, String.valueOf(timestamp));
         sessionData.put(FIELD_CURRENT_TOKEN, token);
+        sessionData.put(FIELD_STATUS, STATUS_ONLINE);
         redisTemplate.opsForHash().putAll(key, sessionData);
         long ttlMillis = activityTimeout + 60000;
         redisTemplate.expire(key, ttlMillis, TimeUnit.MILLISECONDS);
+    }
+
+    //获取用户状态
+    public String getUserStatus(Long userId) {
+        String key = USER_SESSION_PREFIX + userId;
+        Object status = redisTemplate.opsForHash().get(key, FIELD_STATUS);
+        if (status == null) {
+            return STATUS_OFFLINE;
+        }
+        return (String) status;
+    }
+
+    //设置用户状态
+    public void setUserStatus(Long userId, String status) {
+        String key = USER_SESSION_PREFIX + userId;
+        redisTemplate.opsForHash().put(key, FIELD_STATUS, status);
+        long ttlMillis = activityTimeout + 60000;
+        redisTemplate.expire(key, ttlMillis, TimeUnit.MILLISECONDS);
+    }
+
+    //判断用户是否离开（超过30分钟无活动）
+    public boolean isUserAway(Long userId) {
+        Long lastActivity = getUserLastActivityTime(userId);
+        if (lastActivity == null) {
+            return false;
+        }
+        return (System.currentTimeMillis() - lastActivity) > AWAY_THRESHOLD_MILLIS;
     }
     //更新用户会话数据
     public void updateUserActivity(Long userId, long timestamp) {
         String key = USER_SESSION_PREFIX + userId;
         redisTemplate.opsForHash().put(key, FIELD_LAST_ACTIVITY, String.valueOf(timestamp));
+        redisTemplate.opsForHash().put(key, FIELD_STATUS, STATUS_ONLINE);
         long ttlMillis = activityTimeout + 60000;
         redisTemplate.expire(key, ttlMillis, TimeUnit.MILLISECONDS);
+    }
+    //更新用户最后活动时间（使用当前时间）
+    public void updateUserLastActivity(Long userId) {
+        updateUserActivity(userId, System.currentTimeMillis());
     }
     //获取用户最后活动时间
     public Long getUserLastActivityTime(Long userId) {

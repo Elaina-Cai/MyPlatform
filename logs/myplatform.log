@@ -1,32 +1,107 @@
-2026-05-27 14:58:50 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 35348 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
-2026-05-27 14:58:50 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "dev"
-2026-05-27 14:58:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-05-27 14:58:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-05-27 14:58:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
-2026-05-27 14:58:51 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-05-27 14:58:51 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-05-27 14:58:51 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-05-27 14:58:51 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-05-27 14:58:51 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1064 ms
-2026-05-27 14:58:51 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
-2026-05-27 14:58:51 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
-2026-05-27 14:58:51 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads/
-2026-05-27 14:58:51 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads/
-2026-05-27 14:58:52 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2026-05-27 14:58:52 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2026-05-27 14:58:52 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Web server failed to start. Port 8080 was already in use.
-
-Action:
-
-Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
-
+2026-05-31 16:22:31 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 12608 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
+2026-05-31 16:22:31 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "local"
+2026-05-31 16:22:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-31 16:22:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-31 16:22:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+2026-05-31 16:22:32 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 16:22:32 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 16:22:32 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-05-31 16:22:32 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-31 16:22:32 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1079 ms
+2026-05-31 16:22:33 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
+2026-05-31 16:22:33 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
+2026-05-31 16:22:33 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\avatars/
+2026-05-31 16:22:33 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
+2026-05-31 16:22:33 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-31 16:22:33 [main] INFO  o.e.myplatform.MyPlatformApplication - Started MyPlatformApplication in 2.697 seconds (process running for 3.002)
+2026-05-31 16:22:33 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:22:58 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:23:23 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:23:48 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:24:13 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:24:38 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:25:03 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:25:28 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:25:30 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-31 16:25:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-31 16:25:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-31 16:25:35 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 16:25:35 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61f1b401
+2026-05-31 16:25:35 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 16:25:36 [http-nio-8080-exec-7] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-31 16:25:36 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=bac9d9e9-1c52-06eb-b23c-7f5b21ffaa29
+2026-05-31 16:25:36 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-31 16:25:36 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 连接建立后，userId=13 的 lastActivity=1780215936414, isAway=false, status=online
+2026-05-31 16:25:36 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 推送自己状态给好友: friend_online, 在线好友数: 4
+2026-05-31 16:25:36 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-31 16:25:45 [http-nio-8080-exec-6] INFO  o.e.m.w.MessageWebSocketHandler - 收到私聊消息: senderId=13, receiverId=14, content=
+2026-05-31 16:25:49 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=bac9d9e9-1c52-06eb-b23c-7f5b21ffaa29, status=CloseStatus[code=1001, reason=null]
+2026-05-31 16:25:53 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:26:18 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:26:43 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:27:08 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:27:14 [http-nio-8080-exec-7] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-31 16:27:14 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=e7a79a13-11d3-d5d6-b10a-545435b778e1
+2026-05-31 16:27:14 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-31 16:27:14 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 连接建立后，userId=13 的 lastActivity=1780216034465, isAway=false, status=online
+2026-05-31 16:27:14 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 推送自己状态给好友: friend_online, 在线好友数: 4
+2026-05-31 16:27:14 [http-nio-8080-exec-7] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-31 16:27:33 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:27:43 [http-nio-8080-exec-3] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=e7a79a13-11d3-d5d6-b10a-545435b778e1, status=CloseStatus[code=1006, reason=Connection reset]
+2026-05-31 16:27:58 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:28:23 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:28:48 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:29:13 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:29:38 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:30:03 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:30:28 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:30:53 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:31:18 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:31:43 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:32:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-31 16:32:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-31 16:32:02 [main] INFO  o.e.myplatform.MyPlatformApplication - Starting MyPlatformApplication using Java 21.0.10 with PID 35664 (C:\Users\Elaina\program\Java\MyPlatform\target\classes started by Elaina in C:\Users\Elaina\program\Java\MyPlatform)
+2026-05-31 16:32:02 [main] INFO  o.e.myplatform.MyPlatformApplication - The following 1 profile is active: "local"
+2026-05-31 16:32:02 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-31 16:32:02 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-31 16:32:02 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2026-05-31 16:32:03 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 16:32:03 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 16:32:03 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-05-31 16:32:03 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-31 16:32:03 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 888 ms
+2026-05-31 16:32:03 [main] INFO  o.e.myplatform.task.FileCleanupTask - 文件清理任务已启动，清理 24 小时前的未引用文件
+2026-05-31 16:32:03 [main] INFO  o.e.m.w.GroupMessageSubscriber - 群聊消息订阅器初始化完成
+2026-05-31 16:32:03 [main] INFO  o.e.myplatform.config.WebConfig - Avatar upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\avatars/
+2026-05-31 16:32:03 [main] INFO  o.e.myplatform.config.WebConfig - File upload path: file:C:\Users\Elaina\program\Java\MyPlatform\uploads\files/
+2026-05-31 16:32:04 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-31 16:32:04 [main] INFO  o.e.myplatform.MyPlatformApplication - Started MyPlatformApplication in 2.26 seconds (process running for 2.482)
+2026-05-31 16:32:04 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:32:22 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-31 16:32:22 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-31 16:32:22 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-31 16:32:22 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 16:32:22 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fa09d6c
+2026-05-31 16:32:22 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 16:32:29 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:32:44 [http-nio-8080-exec-8] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-31 16:32:44 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=d679215f-400f-6901-c13b-ddd0cd2c4067
+2026-05-31 16:32:44 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-31 16:32:44 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 连接建立后，userId=13 的 lastActivity=1780216364181, isAway=false, status=online
+2026-05-31 16:32:44 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 推送自己状态给好友: friend_online, 在线好友数: 4
+2026-05-31 16:32:44 [http-nio-8080-exec-8] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-31 16:32:54 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:33:00 [http-nio-8080-exec-3] INFO  o.e.m.w.MessageWebSocketHandler - 收到私聊消息: senderId=13, receiverId=14, content=1
+2026-05-31 16:33:05 [http-nio-8080-exec-9] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=d679215f-400f-6901-c13b-ddd0cd2c4067, status=CloseStatus[code=1001, reason=null]
+2026-05-31 16:33:19 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:33:29 [http-nio-8080-exec-5] INFO  o.e.m.w.WebSocketAuthInterceptor - WebSocket 握手成功：userId=13
+2026-05-31 16:33:29 [http-nio-8080-exec-5] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接: userId=13, sessionId=a2e6b3c6-0ef0-158b-9712-ab540552f89c
+2026-05-31 16:33:29 [http-nio-8080-exec-5] INFO  o.e.m.w.MessageWebSocketHandler - 当前在线会话数量: 1
+2026-05-31 16:33:29 [http-nio-8080-exec-5] INFO  o.e.m.w.MessageWebSocketHandler - 连接建立后，userId=13 的 lastActivity=1780216409202, isAway=false, status=online
+2026-05-31 16:33:29 [http-nio-8080-exec-5] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 推送自己状态给好友: friend_online, 在线好友数: 4
+2026-05-31 16:33:29 [http-nio-8080-exec-5] INFO  o.e.m.w.MessageWebSocketHandler - 用户 13 已订阅 1 个群聊频道
+2026-05-31 16:33:44 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:34:03 [http-nio-8080-exec-6] INFO  o.e.m.w.MessageWebSocketHandler - WebSocket 连接断开: sessionId=a2e6b3c6-0ef0-158b-9712-ab540552f89c, status=CloseStatus[code=1001, reason=null]
+2026-05-31 16:34:09 [scheduling-1] INFO  o.e.m.w.MessageWebSocketHandler - 心跳检测开始
+2026-05-31 16:34:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-31 16:34:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@MapperScan("org.example.myplatform.mapper")
+@MapperScan({"org.example.myplatform.mapper", "org.example.myplatform.xiaoxiaole.mapper"})
 @EnableScheduling  // 添加这行启用定时任务
 public class MyPlatformApplication {
     public static void main(String[] args) {

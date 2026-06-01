@@ -648,8 +648,8 @@ public class ChatGroupServiceImpl implements ChatGroupService {
         }
 
         // 3. 检查是否已读，未读则插入记录
-        ChatGroupMessageRead existing = chatGroupMessageReadMapper.selectByMessageIdAndUserId(messageId, userId);
-        if (existing == null) {
+        Integer existing = chatGroupMessageReadMapper.checkMessageRead(messageId, userId);
+        if (existing == null || existing == 0) {
             chatGroupMessageReadMapper.insertReadRecord(messageId, userId);
         }
     }
@@ -679,8 +679,7 @@ public class ChatGroupServiceImpl implements ChatGroupService {
 
         // 2. 检查邀请人是否是群主或管理员
         ChatGroupMember inviterMember = chatGroupMemberMapper.selectByGroupIdAndUserId(groupId, inviterId);
-        log.debug("权限检查: inviterId={}, groupId={}", inviterId, groupId);
-        log.debug("成员记录: {}", inviterMember);
+
         if (inviterMember == null || (inviterMember.getRole() != 1 && inviterMember.getRole() != 2)) {
             throw new BadRequestException("只有群主和管理员可以邀请好友");
         }

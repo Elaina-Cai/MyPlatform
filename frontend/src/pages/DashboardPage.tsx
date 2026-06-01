@@ -34,6 +34,8 @@ export function DashboardPage() {
   const [friends, setFriends] = useState<FriendVO[]>([]);
   const [friendSearch, setFriendSearch] = useState("");
   const [onlineFriends, setOnlineFriends] = useState<Set<number>>(new Set());
+  const [awayFriends, setAwayFriends] = useState<Set<number>>(new Set());
+  const [friendStatusReady, setFriendStatusReady] = useState(false);
   const [selectedChat, setSelectedChat] = useState<FriendVO | null>(null);
   const [chatPanelOpen, setChatPanelOpen] = useState(false);
   const [groups, setGroups] = useState<GroupSessionVO[]>([]);
@@ -45,17 +47,26 @@ export function DashboardPage() {
   const currentChatIdRef = useRef<number | null>(null);
   const currentGroupIdRef = useRef<number | null>(null);
   const isViewingChatRef = useRef<number | null>(null);
+  const isViewingGroupRef = useRef<number | null>(null);
+  const loadFriendsRef = useRef<(viewedId?: number | null) => Promise<void>>(() => Promise.resolve());
   const chatRef = useRef<ChatPageRef>(null);
   const groupChatRef = useRef<GroupChatPageRef>(null);
-  const isViewingGroupRef = useRef<number | null>(null);
 
   useEffect(() => {
     function handleSwitchNav(e: Event) {
       const detail = (e as CustomEvent).detail;
       setActiveNav(detail.nav);
     }
+    function handleWsConnected() {
+      setFriendStatusReady(false);
+      void loadFriendsRef.current();
+    }
     window.addEventListener("switch-nav", handleSwitchNav);
-    return () => window.removeEventListener("switch-nav", handleSwitchNav);
+    window.addEventListener("ws-connected", handleWsConnected);
+    return () => {
+      window.removeEventListener("switch-nav", handleSwitchNav);
+      window.removeEventListener("ws-connected", handleWsConnected);
+    };
   }, []);
 
   useEffect(() => {
@@ -117,10 +128,13 @@ export function DashboardPage() {
         }
       });
       setOnlineFriends(onlineSet);
+      setFriendStatusReady(true);
     } catch (err) {
       console.error("加载好友列表失败", err);
     }
   }, []);
+
+  loadFriendsRef.current = loadFriends;
 
   const loadGroups = useCallback(async (viewedId?: number | null) => {
     try {
@@ -147,12 +161,22 @@ export function DashboardPage() {
     const timer = setInterval(() => {
       void loadApplyCount();
       void loadGroupInviteCount();
-    }, 30000);
+    }, 300000); // 5分钟刷新一次，避免频繁请求影响离开状态检测
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        if (window.webSocket?.readyState === WebSocket.OPEN) {
+          void loadFriendsRef.current();
+        }
+      }
+    }
+    window.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       clearInterval(timer);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [loadApplyCount, loadGroupInviteCount, loadFriends, loadGroups]);
+  }, [loadApplyCount, loadGroupInviteCount, loadGroups]);
 
   useEffect(() => {
     document.title = applyCount > 0 ? `(${applyCount}) MyPlatform` : "MyPlatform";
@@ -162,6 +186,11 @@ export function DashboardPage() {
     function handleFriendOnline(e: Event) {
       const detail = (e as CustomEvent).detail;
       setOnlineFriends(prev => new Set([...prev, detail.friendId]));
+      setAwayFriends(prev => {
+        const next = new Set(prev);
+        next.delete(detail.friendId);
+        return next;
+      });
     }
 
     function handleFriendOffline(e: Event) {
@@ -171,6 +200,21 @@ export function DashboardPage() {
         next.delete(detail.friendId);
         return next;
       });
+      setAwayFriends(prev => {
+        const next = new Set(prev);
+        next.delete(detail.friendId);
+        return next;
+      });
+    }
+
+    function handleFriendAway(e: Event) {
+      const detail = (e as CustomEvent).detail;
+      setOnlineFriends(prev => {
+        const next = new Set(prev);
+        next.delete(detail.friendId);
+        return next;
+      });
+      setAwayFriends(prev => new Set([...prev, detail.friendId]));
     }
 
     function handleChatMessage(e: Event) {
@@ -213,8 +257,15 @@ export function DashboardPage() {
       void loadGroupInviteCount();
     }
 
+    function handleFriendsStatusReady() {
+      console.log("收到 friends-status-ready，设置 friendStatusReady = true");
+      setFriendStatusReady(true);
+    }
+
     window.addEventListener("friend-online", handleFriendOnline);
     window.addEventListener("friend-offline", handleFriendOffline);
+    window.addEventListener("friend-away", handleFriendAway);
+    window.addEventListener("friends-status-ready", handleFriendsStatusReady);
     window.addEventListener("chat-message", handleChatMessage);
     window.addEventListener("group-message", handleGroupMessage);
     window.addEventListener("friend-apply", handleFriendApply);
@@ -225,6 +276,8 @@ export function DashboardPage() {
     return () => {
       window.removeEventListener("friend-online", handleFriendOnline);
       window.removeEventListener("friend-offline", handleFriendOffline);
+      window.removeEventListener("friend-away", handleFriendAway);
+      window.removeEventListener("friends-status-ready", handleFriendsStatusReady);
       window.removeEventListener("chat-message", handleChatMessage);
       window.removeEventListener("group-message", handleGroupMessage);
       window.removeEventListener("friend-apply", handleFriendApply);
@@ -330,13 +383,20 @@ export function DashboardPage() {
               </div>
               <div className="friend-online-list">
                 {/* 好友列表 */}
-                {filteredFriends.filter(f =>
+                {!friendStatusReady ? (
+                  <div className="friend-loading">加载中...</div>
+                ) : filteredFriends.filter(f =>
                   (f.nickname?.toLowerCase().includes(friendSearch.toLowerCase()) ||
                    f.username.toLowerCase().includes(friendSearch.toLowerCase()))
-                ).map(friend => (
+                ).map(friend => {
+                  const isOnline = onlineFriends.has(friend.userId);
+                  const isAway = awayFriends.has(friend.userId);
+                  const displayStatus = isOnline ? "在线" : isAway ? "离开" : "离线";
+                  const statusClass = isOnline ? "online" : isAway ? "away" : "";
+                  return (
                   <div
                     key={`friend-${friend.userId}`}
-                    className={`friend-online-item ${onlineFriends.has(friend.userId) ? "online" : ""}`}
+                    className={`friend-online-item ${statusClass}`}
                     onClick={() => {
                       setSelectedChat(friend);
                       setSelectedGroup(null);
@@ -350,7 +410,7 @@ export function DashboardPage() {
                       ) : (
                         <span>{(friend.nickname || friend.username)[0]?.toUpperCase()}</span>
                       )}
-                      <span className={`online-dot ${onlineFriends.has(friend.userId) ? "online" : ""}`} />
+                      <span className={`online-dot ${statusClass}`} />
                     </div>
                     <div className="friend-online-info">
                       <div className="friend-online-name">
@@ -360,11 +420,12 @@ export function DashboardPage() {
                         )}
                       </div>
                       <div className="friend-online-status">
-                        {onlineFriends.has(friend.userId) ? "在线" : "离线"}
+                        {displayStatus}
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
                 {/* 群聊列表 */}
                 {groups.filter(g => g.name.toLowerCase().includes(friendSearch.toLowerCase())).map(group => (
                   <div
@@ -435,6 +496,7 @@ export function DashboardPage() {
             onBack={() => {
               chatRef.current?.cleanup();
               setChatPanelOpen(false);
+              setSelectedChat(null);
             }}
             onRead={() => resetFriendUnread(selectedChat.userId)}
             isSidePanel={true}

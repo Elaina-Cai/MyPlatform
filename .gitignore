@@ -34,6 +34,7 @@ build/
 
 ### Spring Boot ###
 application-prod.yml
+application-dev.yml
 .env
 
 ### Vite → nginx 静态产物（在 frontend 目录执行 npm run build 生成）###
@@ -47,3 +48,11 @@ uploads/files/*.mp4
 uploads/files/*.jpg
 uploads/files/*.png
 uploads/files/*.gif
+
+# 日志文件
+logs/
+*.log
+
+# 操作系统文件
+.DS_Store
+Thumbs.db

@@ -134,3 +134,20 @@ CREATE TABLE IF NOT EXISTS `chat_group_join_request` (
     KEY `idx_applicant_id` (`applicant_id`),
     KEY `idx_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='入群申请表';
+
+-- 消消乐游戏记录表
+CREATE TABLE IF NOT EXISTS `xiaoxiaole_record` (
+`id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+`user_id` BIGINT NOT NULL COMMENT '用户ID',
+`current_level` INT DEFAULT '1' COMMENT '当前关卡',
+`highest_level` INT DEFAULT '1' COMMENT '历史最高关卡',
+`total_score` BIGINT DEFAULT '0' COMMENT '总分数',
+`best_score` BIGINT DEFAULT '0' COMMENT '最高分',
+`play_count` INT DEFAULT '0' COMMENT '游玩次数',
+`created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+PRIMARY KEY (`id`),
+    KEY `idx_user_id` (`user_id`),
+    KEY `idx_highest_level` (`highest_level`),
+    CONSTRAINT `fk_xiaoxiaole_user` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='消消乐游戏记录表';

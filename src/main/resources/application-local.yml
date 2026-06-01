@@ -2,9 +2,9 @@ spring:
   application:
     name: MyPlatform
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:my_platform}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:123456}
+    url: jdbc:mysql://localhost:3306/my_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
@@ -12,10 +12,10 @@ spring:
       max-request-size: 500MB
   data:
     redis:
-      host: ${REDIS_HOST:192.168.75.133}
-      port: ${REDIS_PORT:6379}
+      host: 192.168.75.133
+      port: 6379
       password: "123456"
-      database: ${REDIS_DB:0}
+      database: 0
       timeout: 3000ms
       lettuce:
         pool:
@@ -48,14 +48,14 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 jwt:
-  secret: ${JWT_SECRET:dev-only-not-for-production-32chars-min}
+  secret: dev-only-not-for-production-32chars-min
   blacklist-retention-ms: 604800000
 auth:
   activity-timeout: 1800000
 cors:
   allowed-origins: "*"
 avatar:
-  upload-path: ${AVATAR_UPLOAD_PATH:${user.dir}/uploads/avatars}
+  upload-path: ${user.dir}/uploads/avatars
 file:
-  upload-path: ${FILE_UPLOAD_PATH:${user.dir}/uploads/files}
+  upload-path: ${user.dir}/uploads/files
   max-size: 500MB

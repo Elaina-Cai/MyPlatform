@@ -29,9 +29,7 @@ public class MessageController {
             HttpServletRequest request
     ) {
         Long currentUserId = (Long) request.getAttribute(JwtInterceptor.USER_ID_ATTRIBUTE);
-        log.info("获取聊天记录: userId={}, friendId={}", currentUserId, friendId);
         List<MessageVO> history = messageService.getChatHistory(currentUserId, friendId);
-        log.debug("查询到消息数: {}", history.size());
         messageService.markAsRead(currentUserId, friendId);
         return Result.success(history);
     }

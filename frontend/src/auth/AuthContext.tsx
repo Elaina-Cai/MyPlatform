@@ -120,6 +120,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           case "friend_offline":
             window.dispatchEvent(new CustomEvent("friend-offline", { detail: message }));
             break;
+          case "friend_away":
+            window.dispatchEvent(new CustomEvent("friend-away", { detail: message }));
+            break;
+          case "friends_status_ready":
+            window.dispatchEvent(new CustomEvent("friends-status-ready"));
+            break;
           case "friend_apply":
             window.dispatchEvent(new CustomEvent("friend-apply", { detail: message }));
             break;
@@ -173,6 +179,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       wsRef.current = null;
     }
   }, [token, initWebSocket]);
+
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible" && token) {
+        void refreshUser();
+        if (wsRef.current?.readyState !== WebSocket.OPEN) {
+          void initWebSocket();
+        }
+      }
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [token, refreshUser, initWebSocket]);
 
   const sendWsMessage = useCallback((receiverId: number, content: string, fileUrl?: string | null, fileType?: string | null) => {
     if (wsRef.current?.readyState === WebSocket.OPEN) {

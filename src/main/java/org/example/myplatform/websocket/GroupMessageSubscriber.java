@@ -80,7 +80,7 @@ public class GroupMessageSubscriber {
         String channel = "channel:group:" + groupId;
         groupSessions.computeIfAbsent(channel, k -> new ConcurrentHashMap<>())
                      .put(userId, session);
-        log.info("用户 {} 已加入群聊频道: groupId={}", userId, groupId);
+
     }
 
     // 移除用户从群聊频道
@@ -89,7 +89,6 @@ public class GroupMessageSubscriber {
         Map<Long, org.springframework.web.socket.WebSocketSession> sessions = groupSessions.get(channel);
         if (sessions != null) {
             sessions.remove(userId);
-            log.info("用户 {} 已离开群聊频道: groupId={}", userId, groupId);
         }
     }
 

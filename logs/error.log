@@ -7,3 +7,13 @@
 2026/05/24 19:21:01 [notice] 41584#7936: signal process started
 2026/05/24 19:21:01 [error] 41584#7936: OpenEvent("Global\ngx_reload_26740") failed (2: The system cannot find the file specified)
 2026/05/25 16:51:06 [emerg] 10352#30040: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 18:52:02 [emerg] 41728#11652: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 19:33:35 [emerg] 32004#40740: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 19:59:26 [emerg] 37236#16512: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 20:08:25 [emerg] 1576#40064: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 20:26:37 [emerg] 15780#40080: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 20:32:53 [emerg] 20988#41588: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 20:39:48 [emerg] 15636#28864: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 21:12:00 [emerg] 21208#3400: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 21:21:57 [emerg] 4380#3672: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)
+2026/05/27 21:26:37 [emerg] 37960#35792: CreateFile() "C:\Users\Elaina\program\Java\MyPlatform/conf/nginx.conf" failed (3: The system cannot find the path specified)

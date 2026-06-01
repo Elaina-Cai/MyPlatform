@@ -670,6 +670,14 @@ input {
   font-size: 13px;
 }
 
+.friend-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #999;
+  font-size: 14px;
+}
 .friend-online-item {
   display: flex;
   align-items: center;
@@ -767,6 +775,18 @@ input {
 
 .friend-online-item.online .friend-online-status {
   color: #4ade80;
+}
+
+.friend-online-item.away .friend-online-status {
+  color: #fbbf24;
+}
+
+.friend-online-item.away {
+  opacity: 0.8;
+}
+
+.online-dot.away {
+  background-color: #fbbf24 !important;
 }
 
 /* ===== Â•ΩÂèãÈ°µÈù¢Ê†∑Âºè ===== */
@@ -2886,4 +2906,142 @@ button:disabled {
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
+}
+/* ==================== ”Œœ∑“≥√Ê ==================== */
+.game-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.game-header {
+  height: 56px;
+  background: var(--surface);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.game-header .back-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.game-header .back-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.game-header .back-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.game-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.game-actions {
+  width: 80px;
+}
+
+.game-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.game-area {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1;
+  background: var(--surface);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-placeholder {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.game-placeholder p:first-child {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.game-placeholder .hint {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.game-not-found {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+/* ==================== ”Œœ∑ø‚ø®∆¨ ==================== */
+.games-page {
+  padding: 20px;
+}
+
+.games-page h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.game-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.game-card .card-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.game-card .card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.game-card .card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
 }
