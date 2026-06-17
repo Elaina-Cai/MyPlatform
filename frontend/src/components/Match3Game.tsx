@@ -15,16 +15,16 @@ const BLOCK_COLORS: Record<string, string> = {
   "🌈": "linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #9b59b6)",
 };
 const LEVELS = [
-  { targetScore: 1000, moves: 20 },
-  { targetScore: 2000, moves: 18 },
-  { targetScore: 3000, moves: 16 },
-  { targetScore: 5000, moves: 15 },
-  { targetScore: 8000, moves: 14 },
-  { targetScore: 12000, moves: 13 },
-  { targetScore: 16000, moves: 12 },
-  { targetScore: 20000, moves: 11 },
-  { targetScore: 25000, moves: 10 },
-  { targetScore: 30000, moves: 10 },
+  { targetScore: 600, moves: 30 },
+  { targetScore: 1200, moves: 30 },
+  { targetScore: 1800, moves: 30 },
+  { targetScore: 2400, moves: 30 },
+  { targetScore: 3000, moves: 30 },
+  { targetScore: 3600, moves: 30 },
+  { targetScore: 4200, moves: 30 },
+  { targetScore: 4800, moves: 30 },
+  { targetScore: 5200, moves: 35 },
+  { targetScore: 5800, moves: 35 },
 ];
 
 const audioContext = typeof AudioContext !== "undefined" ? new AudioContext() : null;
